@@ -75,8 +75,6 @@ public class BombTest {
         List<String> contents = br.lines().toList();
         return String.join(delimiter, contents).hashCode();
     }
-    public static void main(String[] args){
 
-    }
 
 }

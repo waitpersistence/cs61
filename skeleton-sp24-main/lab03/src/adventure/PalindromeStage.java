@@ -38,7 +38,6 @@ public class PalindromeStage implements AdventureStage {
                 System.out.println("Please enter a valid integer.");
                 input = this.in.readLine();
             }
-
             IntList numLst = digitsToIntList(input);
             IntList reversedLst = reverseList(numLst);
 
@@ -68,6 +67,7 @@ public class PalindromeStage implements AdventureStage {
             reversed = new IntList(l.first, reversed);
             l = l.rest;
         }
+        reversed = new IntList(l.first,reversed);
         return reversed;
     }
 
@@ -77,8 +77,8 @@ public class PalindromeStage implements AdventureStage {
      */
     private static IntList digitsToIntList(String s) {
         int[] a = new int[s.length()];
-        for (int i = s.length(); i > 0; i++) {
-            a[s.length() - i] = Character.getNumericValue(s.charAt(i));
+        for (int i = 0; i < s.length(); i++) {
+            a[i] = Character.getNumericValue(s.charAt(i));
         }
         return IntList.of(a);
     }
