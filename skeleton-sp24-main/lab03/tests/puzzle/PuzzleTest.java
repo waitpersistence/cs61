@@ -29,7 +29,7 @@ public class PuzzleTest {
             s = new Scanner(f);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        }git
+        }
         List<String> lst = new ArrayList<>();
         while (s.hasNextLine()) {
             String clean = s.nextLine().trim();
