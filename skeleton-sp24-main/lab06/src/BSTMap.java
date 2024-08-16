@@ -124,7 +124,7 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B{
     * */
     @Override
     public Object remove(Object key) {
-
+        throw new Exception;
         return null;
     }
     public Node remove_helper(K key){
@@ -143,38 +143,38 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B{
             }
         }
         //一个的
-        if(n.left!=null) {//左边不是空
-            if (zuoyou(n, parent)) {
-                //是右边 真
-                parent.right = n.left;
-                n.left=null;
-            } else {
-                parent.left = n.left;
-                n.left=null;
-            }
-        } else if (n.right!=null) {//右边不是空
-            if(zuoyou(n,parent)){
-                parent.right=n.right;
-                n.right=null;
-            }else {
-                parent.left=n.right;
-                n.right=null;
-            }
-        }
-        return n;
+//        if(n.left!=null) {//左边不是空
+//            if (zuoyou(n, parent)) {
+//                //是右边 真
+//                parent.right = n.left;
+//                n.left=null;
+//            } else {
+//                parent.left = n.left;
+//                n.left=null;
+//            }
+//        } else if (n.right!=null) {//右边不是空
+//            if(zuoyou(n,parent)){
+//                parent.right=n.right;
+//                n.right=null;
+//            }else {
+//                parent.left=n.right;
+//                n.right=null;
+//            }
+//        }
+//        return n;
         //两个都有
         // 情况3：节点有两个子节点
 
     }
-    class Node {
-        int key;
-        Node left, right;
-
-        public Node(int item) {
-            key = item;
-            left = right = null;
-        }
-    }
+//    class Node {
+//        int key;
+//        Node left, right;
+//
+//        public Node(int item) {
+//            key = item;
+//            left = right = null;
+//        }
+//    }
 
     class BinarySearchTree {
         Node root;
@@ -267,32 +267,32 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B{
     }
 
     /**找到父节点*/
-    public Node parent(K key,Node n){
-        if(root==null){
-            return null;
-        }
-        if(key.compareTo(n.left.key)==0){
-            return n;
-        }else if(key.compareTo(n.right.key)==0){
-            return n;
-        }else if(key.compareTo(n.key)<0){
-            return parent(key,n.left);
-        } else if (key.compareTo(root.key)>0) {
-            return parent(key,n.right);
-        }
-        return null;
-
-    }
-    public boolean zuoyou(Node n,Node parent){
-        if(parent.left==n){
-            parent.left=null;
-            return false;//左边是假
-        } else if (parent.right==n) {
-            parent.right=null;
-            return true;//右边是真
-        }
-        return false;
-    }
+//    public Node parent(K key,Node n){
+//        if(root==null){
+//            return null;
+//        }
+//        if(key.compareTo(n.left.key)==0){
+//            return n;
+//        }else if(key.compareTo(n.right.key)==0){
+//            return n;
+//        }else if(key.compareTo(n.key)<0){
+//            return parent(key,n.left);
+//        } else if (key.compareTo(root.key)>0) {
+//            return parent(key,n.right);
+//        }
+//        return null;
+//
+//    }
+//    public boolean zuoyou(Node n,Node parent){
+//        if(parent.left==n){
+//            parent.left=null;
+//            return false;//左边是假
+//        } else if (parent.right==n) {
+//            parent.right=null;
+//            return true;//右边是真
+//        }
+//        return false;
+//    }
 
 
     @Override
