@@ -39,6 +39,21 @@ public class TestRedBlackTree {
         assertThat(newRoot.right.item).isEqualTo(10);
         assertThat(newRoot.left.item).isEqualTo(8);
     }
+    @Test
+    public void rotateLeftTest(){
+        RedBlackTree<Integer> rbtree = new TestableRedBlackTree();
+        assertThat(rbtree.root).isNull();
+        RedBlackTree.RBTreeNode<Integer> node1 = new RedBlackTree.RBTreeNode<>(true, 8, null, null);
+        RedBlackTree.RBTreeNode<Integer> node2 = new RedBlackTree.RBTreeNode<>(false, 9, null, null);
+        RedBlackTree.RBTreeNode<Integer> node3 = new RedBlackTree.RBTreeNode<>(false, 10, null, null);
+        node1.right = node2;
+        node2.right = node3;
+        RedBlackTree.RBTreeNode<Integer> newRoot = rbtree.rotateLeft(node1);
+        assertThat(newRoot.item).isEqualTo(9);
+        assertThat(newRoot.right.item).isEqualTo(10);
+        assertThat(newRoot.left.item).isEqualTo(8);
+
+    }
 
     @Test
     public void testInsertSimple() {
