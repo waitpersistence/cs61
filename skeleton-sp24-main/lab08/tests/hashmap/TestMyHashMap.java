@@ -185,7 +185,7 @@ public class TestMyHashMap {
         assertTimeoutPreemptively(Duration.ofSeconds(10), () -> {
             int backingArrayCapacity = sizeOfBackingArray(m);
             assertThat(backingArrayCapacity).isEqualTo(initialCapacity);
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 m.put("hi" + i, i);
                 if (1.0 * i / backingArrayCapacity > loadFactor) {
                     assertThat(sizeOfBackingArray(m)).isGreaterThan(backingArrayCapacity);

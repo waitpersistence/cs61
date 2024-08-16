@@ -24,6 +24,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public void put(K key, V value) {
         Node node = new Node(key,value);
         int hashcode = Math.floorMod(key.hashCode(),initialCapacity);
+        if(size >= initialCapacity * loadFactor){//注意不同进制间精度，整数相除，小于1的直接是0了
+            this.resize();
+            hashcode = Math.floorMod(key.hashCode(), initialCapacity);
+        }
+        if (buckets[hashcode] == null) {
+            buckets[hashcode] = new LinkedList<>();
+        }
         //先找有没有如果有，就修改值
         for(Node n : buckets[hashcode]){
             if(n.key.equals(node.key)){
@@ -35,25 +42,21 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         //要resize
         size++;
         buckets[hashcode].add(node);
-        double loader = size / initialCapacity;
-        if(loader>=loadFactor){
-            this.buckets =this.resize();
-        }
-
     }
-    public Collection[] resize(){
+    public void resize(){
         //先创建一个更大的
         int newcapacity = initialCapacity*bigger;
         MyHashMap newmap = new MyHashMap(newcapacity);
         for(int i = 0;i<initialCapacity;i++){
             //提取点出来放进新的里面
             for(Node n : buckets[i]){
-                  int hash=Math.floorMod(n.key.hashCode(),initialCapacity);
+                  int hash=Math.floorMod(n.key.hashCode(),newcapacity);
                   newmap.buckets[hash].add(n);
                   //newmap.put(n.key,n.value);
             }
         }
-        return newmap.buckets;
+        this.buckets = newmap.buckets;
+        this.initialCapacity = newcapacity;
     }
     //找到
     @Override
