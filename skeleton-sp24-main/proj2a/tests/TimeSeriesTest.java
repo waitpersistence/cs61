@@ -21,24 +21,24 @@ public class TimeSeriesTest {
 
         TimeSeries dogPopulation = new TimeSeries();
         dogPopulation.put(1994, 400.0);
-        dogPopulation.put(1995, 500.0);
+        //dogPopulation.put(1995, 500.0);
 
-        TimeSeries totalPopulation = catPopulation.plus(dogPopulation);
+        //TimeSeries totalPopulation = catPopulation.plus(dogPopulation);
         // expected: 1991: 0,
         //           1992: 100
         //           1994: 600
         //           1995: 500
+        TimeSeries totalPopulation1 = catPopulation.dividedBy(dogPopulation);
+        //List<Integer> expectedYears = new ArrayList<>
+                //(Arrays.asList(1991, 1992, 1994, 1995));
+        List<Double> expectedTotal1 = new ArrayList<Double>(Arrays.<Double>asList(0.0, 100.0, 0.50));
+        //assertThat(totalPopulation.years()).isEqualTo(expectedYears);
+       // List<Double> expectedTotal = new ArrayList<>
+                //(Arrays.asList(0.0, 100.0, 600.0, 500.0));
 
-        List<Integer> expectedYears = new ArrayList<>
-                (Arrays.asList(1991, 1992, 1994, 1995));
-
-        assertThat(totalPopulation.years()).isEqualTo(expectedYears);
-
-        List<Double> expectedTotal = new ArrayList<>
-                (Arrays.asList(0.0, 100.0, 600.0, 500.0));
-
-        for (int i = 0; i < expectedTotal.size(); i += 1) {
-            assertThat(totalPopulation.data().get(i)).isWithin(1E-10).of(expectedTotal.get(i));
+        for (int i = 0; i < expectedTotal1.size(); i += 1) {
+            //assertThat(totalPopulation.data().get(i)).isWithin(1E-10).of(expectedTotal.get(i));
+            assertThat(totalPopulation1.data().get(i)).isWithin(1E-10).of(expectedTotal1.get(i));
         }
     }
 

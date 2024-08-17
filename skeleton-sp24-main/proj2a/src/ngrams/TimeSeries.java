@@ -1,5 +1,6 @@
 package ngrams;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -28,9 +29,12 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * Creates a copy of TS, but only between STARTYEAR and ENDYEAR,
      * inclusive of both end points.
      */
-    public TimeSeries(TimeSeries ts, int startYear, int endYear) {
-        super();
+    public TimeSeries TimeSeries(TimeSeries ts, int startYear, int endYear) {
+        //super();
         // TODO: Fill in this constructor.
+        TimeSeries re = new TimeSeries();
+        re= (TimeSeries) ts.subMap(startYear,true,endYear,true);
+        return re;
     }
 
     /**
@@ -38,7 +42,11 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Integer> years() {
         // TODO: Fill in this method.
-        return null;
+        List<Integer> re = new LinkedList<>();
+        for(Integer k :this.keySet()){
+            re.add(k);
+        }
+        return re;
     }
 
     /**
@@ -47,7 +55,11 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         // TODO: Fill in this method.
-        return null;
+        List<Double> re = new LinkedList<>();
+        for(Double val : this.values()){
+            re.add(val);
+        }
+        return re;
     }
 
     /**
@@ -61,7 +73,18 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        for(Integer k : this.keySet()){
+            if(ts.containsKey(k)){//有两个加起来
+                Double sum = this.get(k)+ts.get(k);
+                this.put(k,sum);
+            }
+        }
+        for(Integer K :ts.keySet()){
+            if(!this.containsKey(K)){
+                this.put(K,ts.get(K));
+            }
+        }
+        return this;
     }
 
     /**
@@ -75,8 +98,16 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        for(Integer k : this.keySet()){
+            if(ts.containsKey(k)){
+                Double sum = this.get(k)/ts.get(k);
+                this.put(k,sum);
+            }
+        }
+
+        return this;
     }
+
 
     // TODO: Add any private helper methods.
     // TODO: Remove all TODO comments before submitting.
