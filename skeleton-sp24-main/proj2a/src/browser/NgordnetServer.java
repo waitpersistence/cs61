@@ -11,7 +11,7 @@ public class NgordnetServer {
     }
 
     public void startUp() {
-        staticFiles.externalLocation("static");
+        staticFiles.externalLocation("E:\\cs61b\\skeleton-sp24-main\\skeleton-sp24-main\\proj2a\\");
 
         /* Allow for all origin requests (since this is not an authenticated server, we do not
          * care about CSRF).  */
