@@ -100,7 +100,6 @@ public class GameOfLifeTests {
                 {Tileset.NOTHING, Tileset.NOTHING, Tileset.NOTHING, Tileset.NOTHING}
         };
         checkState(firstState, generationOne);
-
         /**
          * 4 4
          * 0111
