@@ -3,6 +3,8 @@ package core;
 import tileengine.TETile;
 import tileengine.Tileset;
 
+import java.util.Random;
+
 public class AutograderBuddy {
 
     /**
@@ -18,9 +20,32 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
+        long seed = getseed(input);
+        World buildworld = new World();
+        TETile[][] world = buildworld.world;
+        world = buildworld.buildwhouse(seed);//第一步完成
+        buildworld.buildmaze();
+        return world;
 
-        throw new RuntimeException("Please fill out AutograderBuddy!");
-
+        //hrow new RuntimeException("Please fill out AutograderBuddy!");
+    }
+    public static long getseed(String input){
+        String re = "";
+        int index=0;
+        Random rdm;
+        for(int i = 0;i<input.length();i++){
+            if(input.charAt(i)=='n'){
+                index = i+1;//
+                break;
+            }
+        }
+        for(int i =index;i<input.length();i++){
+            if(input.charAt(i)!='s'){
+                re += input.charAt(i);
+            }
+        }//先获得种子
+        long seed = Long.valueOf(re);
+        return seed;
     }
 
 
