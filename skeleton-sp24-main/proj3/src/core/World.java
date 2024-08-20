@@ -12,11 +12,14 @@ import java.util.*;
 //生成world
 public class World {
     // build your own world!
-    public Random rdm;
+    Stack<int[]> stack = new Stack<>();
     private final int WIDTH = 62;
     private final int HEIGHT = 42;
+    public Random rdm;
+    private int[][] directionOffsets = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
     TETile[][] world = new TETile[WIDTH][HEIGHT];
-    Stack<int[]> stack = new Stack<>();
+//    Stack<int[]> stack = new Stack<>();
+    public Stack<int[]> points = new Stack<>();
     World() {//初始化为全为草
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
@@ -151,18 +154,17 @@ public class World {
     }
     public void buildmaze() {
         Deque<int[]> deque = new LinkedList<>();
-        Stack<int[]> stack = new Stack<>();
+       Stack<int[]> stack = new Stack<>();
         //step 1:初始化
         for (int maze = 2; maze < WIDTH; maze = maze + 2) {
             for (int y_maze = 2; y_maze < HEIGHT; y_maze += 2) {
                 if(world[maze][y_maze]==Tileset.GRASS&&!fujin(maze,y_maze)) {
                     world[maze][y_maze] = Tileset.UNLOCKED_DOOR;
-//                    growmaze(maze,y_maze);
                 }
             }
         }
         //step 2
-        //随机找点
+        //1.随机找点
         int start_x;
         int start_y;
         while(true){
@@ -179,6 +181,7 @@ public class World {
         }
         public void growmaze (int x, int y) {
             int[][] directions = {{0, 2}, {2, 0}, {0, -2}, {-2, 0}};
+//            Stack<int[]> stack = new Stack<>();
             stack.push(new int[]{x, y});
             while (!stack.isEmpty()) {
                 int[] current = stack.peek();
@@ -190,15 +193,21 @@ public class World {
                 shuffleArray(directions);
 
                 for (int[] direction : directions) {
-                    int newX = x + direction[0];
-                    int newY = y + direction[1];
+                    int newX = now_x + direction[0];
+                    int newY = now_y + direction[1];
 
                     // 检查新位置是否有效且是墙
-                    if ((isvalid(newX, newY)) && world[newX][newY] == Tileset.UNLOCKED_DOOR&&world[x + direction[0] / 2][y + direction[1] / 2] != Tileset.UNLOCKED_DOOR) {
+                    //要用两个栈
+                    //一个用于保存走过的点
+                    //一个用于回退
+                    //DFS走出来的没有循环的
+                    if ((isvalid(newX, newY)) && world[newX][newY] == Tileset.UNLOCKED_DOOR&&!containsPoint(points,new int[]{newX,newY})) {
+//                    &&world[x + direction[0] / 2][y + direction[1] / 2] != Tileset.) {
                         // 打通墙壁
-                        world[x + direction[0] / 2][y + direction[1] / 2] = Tileset.UNLOCKED_DOOR;
+                        world[now_x + direction[0] / 2][now_y + direction[1] / 2] = Tileset.UNLOCKED_DOOR;
                         //world[newX][newY] = Tileset.UNLOCKED_DOOR;
                         // 推入新位置到栈中
+                        points.add(new int[]{newX,newY});
                         stack.push(new int[]{newX, newY});
                         found = true;
                         break;
@@ -208,6 +217,9 @@ public class World {
                 if (!found) {
                     stack.pop();
                 }
+//            if(stack.size()==18){
+//                return;
+//            }
             }
 
         }
@@ -233,6 +245,9 @@ public class World {
         }
         return false;
     }
+
+
+
 }
 
 

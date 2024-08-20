@@ -25,6 +25,7 @@ public class AutograderBuddy {
         TETile[][] world = buildworld.world;
         world = buildworld.buildwhouse(seed);//第一步完成
         buildworld.buildmaze();
+
         return world;
 
         //hrow new RuntimeException("Please fill out AutograderBuddy!");
