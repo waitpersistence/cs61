@@ -22,11 +22,12 @@ public class AutograderBuddy {
     public static TETile[][] getWorldFromInput(String input) {
         long seed = getseed(input);
         World buildworld = new World();
-        TETile[][] world = buildworld.world;
-        world = buildworld.buildwhouse(seed);//第一步完成
-        buildworld.buildmaze();
-
-        return world;
+        buildworld.buildWorld(seed);
+        //第一步完成
+        buildworld.generateRooms();
+        buildworld.buildMaze();
+        buildworld.connectRegions();
+        return buildworld.world;
 
         //hrow new RuntimeException("Please fill out AutograderBuddy!");
     }
