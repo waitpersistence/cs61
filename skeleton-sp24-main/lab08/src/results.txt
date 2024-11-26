@@ -1,0 +1,7 @@
+Enter # strings to insert into each map: neqk
+Please enter a positive integer: 333
+MyHashMap with ArrayList buckets: 0.02 sec
+MyHashMap with LinkedList buckets: 0.00 sec
+MyHashMap with HashSet buckets: 0.00 sec
+MyHashMap with Stack buckets: 0.00 sec
+MyHashMap with ArrayDeque buckets: 0.02 sec
