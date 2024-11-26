@@ -1,5 +1,0 @@
-[3 4, tileengine.TETile@6b2fad11tileengine.TETile@79698539tileengine.TETile@6b2fad11
-, tileengine.TETile@79698539tileengine.TETile@6b2fad11tileengine.TETile@6b2fad11
-, tileengine.TETile@6b2fad11tileengine.TETile@79698539tileengine.TETile@79698539
-, tileengine.TETile@6b2fad11tileengine.TETile@79698539tileengine.TETile@6b2fad11
-]
