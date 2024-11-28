@@ -124,8 +124,34 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
+    #对应1.6.3:作为返回值的函数
+
     def h(n):
-        
+        def g(x):
+            return x
+        if(n==0):
+            return g
+        #如果n=3k+1 则为f1(f3(f2(f1...)))
+        #3k+2 f2(f1(f3(f2(f1..))))
+        #3k f3(f2(f1...))
+        #实际上不应该先得出所有的函数，只需做到这个值进去，能够一次次迭代就行.
+        if(n>0):
+            def m(x):
+                s=x
+                i=1
+                while(i<=n):
+                    if(i%3==1):
+                        s=f1(s)
+                    elif(i%3==2):
+                        s=f2(s)
+                    else:
+                        s=f3(s)
+                    i=i+1
+                return s
+            return m
     return h
+
+
+
             
 
